@@ -1,0 +1,28 @@
+from pandas_datareader import data
+import numpy as nm
+import pandas as pd
+import statistics as st
+import matplotlib.pyplot as plt
+import yfinance as yf
+ticker=yf.Tickers=['GC=F','DX-Y.NYB','CL=F']
+yf.pdr_override()
+start_date="2021-01-01"
+end_date="2021-12-31"
+DATA = data.get_data_yahoo(ticker, start=start_date, end=end_date)
+alldays = pd.date_range(start=start_date, end=end_date, freq='B')
+DATA=DATA.reindex(alldays)
+DATA.fillna("null",inplace=True)
+DATA.rename(columns = {'Adj Close':'Close'}, inplace = True)
+DATA.rename(columns = {'CL=F':'Crude Oil'}, inplace = True)
+DATA.rename(columns = {'DX-Y.NYB':'Dollar'}, inplace = True)
+DATA.rename(columns = {'GC=F':'Gold'}, inplace = True)
+pd.set_option('display.max_columns', None)
+print(DATA)
+
+
+
+
+
+
+
+    
